@@ -87,9 +87,6 @@ public class ConexionHttp {
             for (int i = 0; i < jsonDatos.length(); i++) {
                 JSONArray dato = jsonDatos.getJSONArray(i);
                 SimpleDateFormat formater = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
-
-                Log.d(dato.getString(0), dato.getString(1));
-
                 Date fecha = formater.parse(dato.getString(0));
                 Double valor = Double.parseDouble(dato.getString(1));
                 SetDatos set = new SetDatos(fecha, valor);

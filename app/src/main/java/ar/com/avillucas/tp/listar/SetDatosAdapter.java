@@ -35,7 +35,7 @@ public class SetDatosAdapter extends RecyclerView.Adapter<SetDatosViewHolder> {
         }
 
 
-        @SuppressLint("DefaultLocale")
+        @SuppressLint({"DefaultLocale", "SetTextI18n"})
         @Override
         public void onBindViewHolder(@NonNull SetDatosViewHolder holder, int position) {
             SetDatos dato = this.datos.get(position);
@@ -43,7 +43,7 @@ public class SetDatosAdapter extends RecyclerView.Adapter<SetDatosViewHolder> {
             TextView valor = holder.itemView.findViewById(R.id.lblDatoValor);
             DateFormat dateFormat = DateFormat.getDateInstance(DateFormat.MEDIUM, Locale.getDefault());
             fecha.setText( dateFormat.format(dato.getFecha()));
-            valor.setText(String.format("%.4f", dato.getValor()));
+            valor.setText(String.format("%.4f ", dato.getValor())+"%");
         }
 
         @Override

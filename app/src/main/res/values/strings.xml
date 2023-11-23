@@ -3,5 +3,6 @@
     <string name="action_settings">Settings</string>
     <!-- Strings used for fragments for navigation -->
     <string name="datoFecha">Fecha</string>
-    <string name="precio_del_gasoil_por_mes">Precio del Gasoil por mes</string>
+    <string name="precio_del_gasoil_titulo">Producción de Gasoil</string>
+    <string name="precio_del_gasoil_subtitulo">Variación porcentual en relacion al  período anterior </string>
 </resources>

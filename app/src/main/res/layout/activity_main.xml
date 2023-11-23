@@ -8,20 +8,43 @@
     tools:context=".MainActivity">
 
     <LinearLayout
+        android:layout_marginEnd="15dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
         >
 
         <TextView
+
             android:id="@+id/txtGasoilTitulo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/precio_del_gasoil_por_mes"
-            android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+            android:text="@string/precio_del_gasoil_titulo"
+            android:textAllCaps="true"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            android:textSize="16sp"
+            android:textAlignment="center"
+            android:textStyle="bold" />
+        />
+
+        <TextView
+
+            android:id="@+id/txtGasoilSubtitulo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/precio_del_gasoil_subtitulo"
+            android:textAlignment="center"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            android:textSize="12sp"
+            android:textStyle="italic" />
         />
 
         <androidx.recyclerview.widget.RecyclerView
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
             android:id="@+id/datosListarReciclerView"
             android:layout_width="match_parent"
             android:layout_height="900dp" />
