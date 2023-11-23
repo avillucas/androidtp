@@ -18,10 +18,13 @@ public class HiloConsulta extends Thread {
 
     @Override
     public void run() {
-        SetDatosServicio servicio = new SetDatosServicio();
-        List<SetDatos> datos = servicio.traerLista();
-        Message message = new Message();
-        message.obj = datos;
-        this.manejandor.sendMessage(message);
+
+            SetDatosServicio servicio = new SetDatosServicio();
+            List<SetDatos> datos = servicio.traerLista();
+            Message message = new Message();
+            message.obj = datos;
+            this.manejandor.sendMessage(message);
+
+
     }
 }

@@ -1,13 +1,18 @@
 package ar.com.avillucas.tp.servicios;
 
+import android.util.Log;
+
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
 import java.net.URL;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -28,17 +33,16 @@ public class ConexionHttp {
 
     private HttpURLConnection conectar(String enpointUrl) {
         URL url = null;
+        HttpURLConnection urlConnection = null;
         try {
             url = new URL(enpointUrl);
-            HttpURLConnection urlConnection = (HttpURLConnection)
-                    url.openConnection();
+            urlConnection = (HttpURLConnection) url.openConnection();
             urlConnection.setReadTimeout(10000 /* milliseconds */);
             urlConnection.setConnectTimeout(15000 /* milliseconds */);
-            return urlConnection;
         } catch (IOException e) {
-            e.printStackTrace();
+            throw new RuntimeException(e);
         }
-        return null;
+        return urlConnection;
     }
 
     public boolean isReady() {
@@ -59,7 +63,7 @@ public class ConexionHttp {
 
     public byte[] getBytesDataByGET(String endpointUrl) throws IOException {
         if (!this.isReady()) {
-            this.conectar(endpointUrl);
+            conn = this.conectar(endpointUrl);
         }
         conn.setRequestMethod("GET");
         conn.connect();
@@ -72,20 +76,33 @@ public class ConexionHttp {
         }
     }
 
-    public List<SetDatos> getSetDatosJSONByGET(String endpointUrl) throws Exception {
-        List<SetDatos> datos = new ArrayList<SetDatos>() ;
-        byte[] bytes = getBytesDataByGET(endpointUrl);
-        String jsonResponse = new String(bytes, "UTF-8");
-        JSONObject jsonObject = new JSONObject(jsonResponse);
-        JSONArray jsonDatos = jsonObject.getJSONArray("data");
-        for (int i = 0; i < jsonDatos.length(); i++) {
-            JSONArray dato = jsonDatos.getJSONArray(i);
-            SimpleDateFormat formater =  new SimpleDateFormat("dd-MMM-yyyy", Locale.ENGLISH);
-            Date fecha = formater.parse(dato.getString(0));
-            Double valor = Double.parseDouble(dato.getString(1));
-            SetDatos set  = new SetDatos(fecha,valor);
-            datos.add(set);
+    public List<SetDatos> getSetDatosJSONByGET(String endpointUrl) {
+        List<SetDatos> datos = new ArrayList<SetDatos>();
+        try {
+            byte[] bytes = new byte[0];
+            bytes = getBytesDataByGET(endpointUrl);
+            String jsonResponse = new String(bytes, "UTF-8");
+            JSONObject jsonObject = new JSONObject(jsonResponse);
+            JSONArray jsonDatos = jsonObject.getJSONArray("data");
+            for (int i = 0; i < jsonDatos.length(); i++) {
+                JSONArray dato = jsonDatos.getJSONArray(i);
+                SimpleDateFormat formater = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
+
+                Log.d(dato.getString(0), dato.getString(1));
+
+                Date fecha = formater.parse(dato.getString(0));
+                Double valor = Double.parseDouble(dato.getString(1));
+                SetDatos set = new SetDatos(fecha, valor);
+                datos.add(set);
+            }
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        } catch (JSONException e) {
+            throw new RuntimeException(e);
+        } catch (ParseException e) {
+            throw new RuntimeException(e);
         }
+
         return datos;
     }
 

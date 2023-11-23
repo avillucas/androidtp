@@ -29,22 +29,7 @@ public class SetDatosServicio extends ConexionHttp {
     }
 
     public List<SetDatos> traerLista()  {
-        List<SetDatos> datos = new ArrayList<SetDatos>();
-        try {
-       /*     //TODO completar esto
-            Date hoy = new Date();
-            Double d = -0.0888884445789966;
-            datos.add(new SetDatos(hoy, d));
-            SimpleDateFormat formater = new SimpleDateFormat("dd-MM-YY", Locale.ENGLISH);
-            Date hoy2 = formater.parse("22-10-2023");
-            Double d2 = -0.0988884445789966;
-            datos.add(new SetDatos(hoy2, d2));*/
-            datos = this.getSetDatosJSONByGET(this.endpoint);
-
-        }catch(Exception e){
-            e.printStackTrace();
-        }
-        return datos;
+        return this.getSetDatosJSONByGET(this.endpoint);
     }
 
 }
