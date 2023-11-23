@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Gas oil</string>
+    <string name="action_settings">Settings</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="datoFecha">Fecha</string>
+    <string name="precio_del_gasoil_por_mes">Precio del Gasoil por mes</string>
+</resources>
